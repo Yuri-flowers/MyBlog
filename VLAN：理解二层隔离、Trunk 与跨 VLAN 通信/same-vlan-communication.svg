@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">同 VLAN 通信：通过交换机直接转发</title><desc id="desc">同一子网、VLAN 10 的两台电脑经两台交换机通信，Access 链路无标签，Trunk 链路携带 VLAN 10 标签，不经过三层网关。</desc>
+<defs><style>text{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#243238}.title{font-size:30px;font-weight:700}.label{font-size:22px;font-weight:700}.body{font-size:19px}.note{font-size:16px;fill:#617078}.green{fill:#087b68}.red{fill:#b34464}</style><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#71838a"/></marker></defs><rect width="1200" height="620" fill="white"/>
+<text x="40" y="55" class="title">同 VLAN 通信：二层交换，不经过网关</text>
+<text x="40" y="92" class="body">PC-A 和 PC-B 都在 VLAN 10，且处于同一 IP 子网。</text>
+<text x="245" y="151" text-anchor="middle" class="label">Access</text>
+<text x="600" y="151" text-anchor="middle" class="label green">Trunk</text>
+<text x="956" y="151" text-anchor="middle" class="label">Access</text>
+<path d="M160 219H330 M474 219H726 M870 219H1040" stroke="#71838a" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="40" y="181" width="120" height="76" rx="6" fill="#f2f5f7" stroke="#becbd1"/>
+<text x="100" y="227" text-anchor="middle" class="label">PC-A</text>
+<rect x="340" y="181" width="134" height="76" rx="6" fill="#eaf8f2" stroke="#249375"/>
+<text x="407" y="212" text-anchor="middle" class="label">SW1</text><text x="407" y="241" text-anchor="middle" class="body green">VLAN 10</text>
+<rect x="736" y="181" width="134" height="76" rx="6" fill="#eaf8f2" stroke="#249375"/>
+<text x="803" y="212" text-anchor="middle" class="label">SW2</text><text x="803" y="241" text-anchor="middle" class="body green">VLAN 10</text>
+<rect x="1040" y="181" width="120" height="76" rx="6" fill="#f2f5f7" stroke="#becbd1"/>
+<text x="1100" y="227" text-anchor="middle" class="label">PC-B</text>
+<text x="40" y="289" class="note">192.168.10.11/24</text><text x="1007" y="289" class="note">192.168.10.12/24</text>
+<text x="245" y="310" text-anchor="middle" class="body">无标签帧</text>
+<text x="600" y="310" text-anchor="middle" class="body green">帧 + VLAN 10 标签</text>
+<text x="956" y="310" text-anchor="middle" class="body">无标签帧</text>
+<path d="M40 344H1160" stroke="#dbe3e6"/>
+<text x="40" y="386" class="label">1. Access 收到帧</text>
+<text x="40" y="424" class="body">SW1 根据接入口配置，</text><text x="40" y="454" class="body">将无标签帧归入 VLAN 10。</text>
+<text x="432" y="386" class="label">2. Trunk 传递帧</text>
+<text x="432" y="424" class="body">SW1 加标签；SW2 读标签，</text><text x="432" y="454" class="body">识别它属于 VLAN 10。</text>
+<text x="829" y="386" class="label">3. Access 发出帧</text>
+<text x="829" y="424" class="body">SW2 向 PC-B 发出无标签帧。</text><text x="829" y="454" class="body">源、目的 MAC 保持不变。</text>
+<rect x="40" y="489" width="1120" height="61" rx="6" fill="#eaf8f2"/>
+<text x="60" y="528" class="label green">数据帧的目标 MAC 是 PC-B；整个过程始终属于 VLAN 10。</text>
+</svg>

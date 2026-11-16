@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">不同 VLAN 通信：经过三层网关路由</title><desc id="desc">PC-A 位于 VLAN 10，PC-C 位于 VLAN 20，通过三层交换机的 SVI 网关路由。两侧 Access 链路均无标签，路由前后 IP 地址不变，二层 MAC 重新封装。</desc>
+<defs><style>text{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#243238}.title{font-size:30px;font-weight:700}.label{font-size:22px;font-weight:700}.body{font-size:19px}.note{font-size:16px;fill:#617078}.green{fill:#087b68}.red{fill:#b34464}</style><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#71838a"/></marker></defs><rect width="1200" height="620" fill="white"/>
+<text x="40" y="55" class="title">不同 VLAN 通信：先交给网关，再路由到目标 VLAN</text>
+<text x="40" y="92" class="body">PC-A 在 VLAN 10，PC-C 在 VLAN 20；三层交换机同时提供两个 VLAN 的网关。</text>
+<rect x="40" y="159" width="185" height="109" rx="6" fill="#eaf8f2" stroke="#249375"/>
+<text x="132" y="194" text-anchor="middle" class="label">PC-A · VLAN 10</text>
+<text x="132" y="227" text-anchor="middle" class="note">192.168.10.11/24</text>
+<text x="132" y="251" text-anchor="middle" class="note">网关 192.168.10.1</text>
+<rect x="425" y="139" width="350" height="164" rx="6" fill="#f2f5f7" stroke="#becbd1"/>
+<text x="600" y="173" text-anchor="middle" class="label">三层交换机 / 网关</text>
+<text x="447" y="209" class="body green">Vlan10：192.168.10.1</text>
+<text x="447" y="243" class="body red">Vlan20：192.168.20.1</text>
+<text x="447" y="279" class="note">查路由 → 从 VLAN 20 转发</text>
+<rect x="975" y="159" width="185" height="109" rx="6" fill="#fff0f4" stroke="#be5c79"/>
+<text x="1067" y="194" text-anchor="middle" class="label">PC-C · VLAN 20</text>
+<text x="1067" y="227" text-anchor="middle" class="note">192.168.20.11/24</text>
+<text x="1067" y="251" text-anchor="middle" class="note">网关 192.168.20.1</text>
+<path d="M226 219H416 M776 219H966" stroke="#71838a" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="325" y="179" text-anchor="middle" class="body">Access</text><text x="875" y="179" text-anchor="middle" class="body">Access</text>
+<text x="325" y="264" text-anchor="middle" class="body">无标签帧</text><text x="875" y="264" text-anchor="middle" class="body">无标签帧</text>
+<path d="M40 332H1160" stroke="#dbe3e6"/>
+<text x="40" y="371" class="label green">1. PC-A 把数据交给网关</text>
+<text x="40" y="408" class="body">源 MAC：PC-A → 目的 MAC：VLAN 10 网关</text>
+<text x="40" y="443" class="body">目标 IP：PC-C（192.168.20.11）</text>
+<text x="655" y="371" class="label red">2. 网关重新封装，发往 PC-C</text>
+<text x="655" y="408" class="body">源 MAC：VLAN 20 网关 → 目的 MAC：PC-C</text>
+<text x="655" y="443" class="body">源、目的 IP 不变；TTL 减 1</text>
+<rect x="40" y="480" width="1120" height="73" rx="6" fill="#f2f5f7"/>
+<text x="60" y="511" class="label">跨 VLAN 靠三层路由；仅有 Trunk，不能让不同 VLAN 自动互通。</text>
+<text x="60" y="539" class="note">此例终端直接接三层交换机，因此不需要 Trunk；若经过其他二层交换机，可用 Trunk 延伸 VLAN。</text>
+</svg>

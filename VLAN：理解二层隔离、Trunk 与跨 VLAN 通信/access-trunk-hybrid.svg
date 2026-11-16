@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1050" viewBox="0 0 1440 1050" role="img" aria-labelledby="title desc">
+<title id="title">Access、Trunk 与 Hybrid：接收和发送帧的区别</title>
+<desc id="desc">以交换机端口为视角，对比接收时 VLAN 归类和发送时标签处理。Hybrid 可为多个 VLAN 配置无标签输出，但无标签输入仍归入 PVID。</desc>
+<defs><style>text{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#243238}.title{font-size:32px;font-weight:700}.head{font-size:28px;font-weight:700}.section{font-size:21px;font-weight:700}.body{font-size:19px}.small{font-size:17px;fill:#617078}.packet{font-size:18px;font-weight:600}.green{fill:#087b68}.red{fill:#b34464}</style><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#71838a" /></marker></defs>
+<rect width="1440" height="1050" fill="white" />
+<text x="40" y="58" class="title">Access、Trunk、Hybrid：帧进入和离开端口时发生什么？</text>
+<text x="40" y="96" class="body">以交换机端口为视角：接收 = 链路 → 交换机；发送 = 交换机 → 链路。</text>
+<rect x="40" y="128" width="440" height="734" rx="12" fill="#ffffff" stroke="#dbe3e6" />
+<rect x="500" y="128" width="440" height="734" rx="12" fill="#ffffff" stroke="#dbe3e6" />
+<rect x="960" y="128" width="440" height="734" rx="12" fill="#ffffff" stroke="#dbe3e6" />
+<rect x="41" y="129" width="438" height="174" rx="11" fill="#f2f7f6" stroke="none" />
+<text x="62" y="171" class="head">Access</text>
+<text x="62" y="211" class="body">接入 VLAN：10</text>
+<text x="62" y="241" class="body">普通数据终端场景</text>
+<text x="62" y="271" class="body">仅承载 VLAN 10</text>
+<text x="62" y="343" class="section">↓ 接收：先确定 VLAN 归属</text>
+<text x="62" y="377" class="small">链路上的帧                     接收结果</text>
+<text x="62" y="591" class="section">↑ 发送：再决定是否携带标签</text>
+<text x="62" y="625" class="small">内部 VLAN 归属                链路上的帧</text>
+<path d="M62 549H458" stroke="#dbe3e6" />
+<rect x="501" y="129" width="438" height="174" rx="11" fill="#f2f7f6" stroke="none" />
+<text x="522" y="171" class="head">Trunk</text>
+<text x="522" y="211" class="body">Native VLAN：10（无标签收发）</text>
+<text x="522" y="241" class="body">允许 VLAN：10、20、30</text>
+<text x="522" y="271" class="body">其余允许的 VLAN 带标签发送</text>
+<text x="522" y="343" class="section">↓ 接收：先确定 VLAN 归属</text>
+<text x="522" y="377" class="small">链路上的帧                     接收结果</text>
+<text x="522" y="591" class="section">↑ 发送：再决定是否携带标签</text>
+<text x="522" y="625" class="small">内部 VLAN 归属                链路上的帧</text>
+<path d="M522 549H918" stroke="#dbe3e6" />
+<rect x="961" y="129" width="438" height="174" rx="11" fill="#f2f7f6" stroke="none" />
+<text x="982" y="171" class="head">Hybrid</text>
+<text x="982" y="211" class="body">PVID：10；允许 VLAN：10、20、30</text>
+<text x="982" y="241" class="body">untagged 输出：10、20</text>
+<text x="982" y="271" class="body">tagged 输出：30</text>
+<text x="982" y="343" class="section">↓ 接收：先确定 VLAN 归属</text>
+<text x="982" y="377" class="small">链路上的帧                     接收结果</text>
+<text x="982" y="591" class="section">↑ 发送：再决定是否携带标签</text>
+<text x="982" y="625" class="small">内部 VLAN 归属                链路上的帧</text>
+<path d="M982 549H1378" stroke="#dbe3e6" />
+<rect x="62" y="394" width="152" height="38" rx="8" fill="#f2f5f7" stroke="#dbe3e6" />
+<text x="74" y="419" class="packet">无标签帧</text>
+<path d="M224 413H265" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="277" y="419" class="packet">归入 VLAN 10</text>
+<text x="62" y="464" class="small">带标签帧的准入规则依平台而异。</text>
+<text x="62" y="494" class="small">此处聚焦普通终端的无标签接入。</text>
+<rect x="62" y="644" width="152" height="38" rx="8" fill="#f2f5f7" stroke="#dbe3e6" />
+<text x="74" y="669" class="packet">VLAN 10</text>
+<path d="M224 663H265" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="277" y="669" class="packet">无标签帧</text>
+<rect x="62" y="694" width="152" height="38" rx="8" fill="#f2f5f7" stroke="#dbe3e6" />
+<text x="74" y="719" class="packet">其他 VLAN</text>
+<path d="M224 713H265" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="277" y="719" class="packet red">不从此口发送</text>
+<text x="62" y="818" class="small">一个数据 VLAN，通常无标签收发。</text>
+<rect x="522" y="394" width="152" height="38" rx="8" fill="#f2f5f7" stroke="#dbe3e6" />
+<text x="534" y="419" class="packet">无标签帧</text>
+<path d="M684 413H725" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="737" y="419" class="packet">归入 VLAN 10</text>
+<rect x="522" y="444" width="152" height="38" rx="8" fill="#eaf8f2" stroke="#a6cfc2" />
+<text x="534" y="469" class="packet">标签 20 / 30</text>
+<path d="M684 463H725" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="737" y="469" class="packet">归入 VLAN 20 / 30</text>
+<rect x="522" y="494" width="152" height="38" rx="8" fill="#eaf8f2" stroke="#a6cfc2" />
+<text x="534" y="519" class="packet">标签 40</text>
+<path d="M684 513H725" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="737" y="519" class="packet red">丢弃：未允许</text>
+<rect x="982" y="394" width="152" height="38" rx="8" fill="#f2f5f7" stroke="#dbe3e6" />
+<text x="994" y="419" class="packet">无标签帧</text>
+<path d="M1144 413H1185" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="1197" y="419" class="packet">归入 VLAN 10</text>
+<rect x="982" y="444" width="152" height="38" rx="8" fill="#eaf8f2" stroke="#a6cfc2" />
+<text x="994" y="469" class="packet">标签 20 / 30</text>
+<path d="M1144 463H1185" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="1197" y="469" class="packet">归入 VLAN 20 / 30</text>
+<rect x="982" y="494" width="152" height="38" rx="8" fill="#eaf8f2" stroke="#a6cfc2" />
+<text x="994" y="519" class="packet">标签 40</text>
+<path d="M1144 513H1185" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="1197" y="519" class="packet red">丢弃：未允许</text>
+<rect x="522" y="644" width="152" height="38" rx="8" fill="#f2f5f7" stroke="#dbe3e6" />
+<text x="534" y="669" class="packet">VLAN 10</text>
+<path d="M684 663H725" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="737" y="669" class="packet">无标签帧</text>
+<rect x="522" y="694" width="152" height="38" rx="8" fill="#eaf8f2" stroke="#a6cfc2" />
+<text x="534" y="719" class="packet">VLAN 20</text>
+<path d="M684 713H725" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="737" y="719" class="packet">带标签 20</text>
+<rect x="522" y="744" width="152" height="38" rx="8" fill="#eaf8f2" stroke="#a6cfc2" />
+<text x="534" y="769" class="packet">VLAN 30</text>
+<path d="M684 763H725" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="737" y="769" class="packet">带标签 30</text>
+<text x="522" y="818" class="small">本例仅 Native VLAN 无标签输出。</text>
+<rect x="982" y="644" width="152" height="38" rx="8" fill="#f2f5f7" stroke="#dbe3e6" />
+<text x="994" y="669" class="packet">VLAN 10</text>
+<path d="M1144 663H1185" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="1197" y="669" class="packet">无标签帧</text>
+<rect x="982" y="694" width="152" height="38" rx="8" fill="#f2f5f7" stroke="#dbe3e6" />
+<text x="994" y="719" class="packet">VLAN 20</text>
+<path d="M1144 713H1185" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="1197" y="719" class="packet">无标签帧</text>
+<rect x="982" y="744" width="152" height="38" rx="8" fill="#eaf8f2" stroke="#a6cfc2" />
+<text x="994" y="769" class="packet">VLAN 30</text>
+<path d="M1144 763H1185" stroke="#71838a" stroke-width="2" marker-end="url(#arrow)" />
+<text x="1197" y="769" class="packet">带标签 30</text>
+<text x="982" y="818" class="small">按 VLAN 配置，可有多个无标签输出。</text>
+<rect x="40" y="884" width="1360" height="84" rx="8" fill="#eaf8f2" stroke="none" />
+<text x="62" y="917" class="section green">关键区别：PVID 决定无标签帧“收进来归谁”；untagged / tagged 决定“发出去带不带标签”。</text>
+<text x="62" y="949" class="body">Hybrid 本例中，VLAN 20 发出时无标签；若对端返回无标签帧，收到后仍归入 PVID 10，并不会自动回到 VLAN 20。</text>
+</svg>
